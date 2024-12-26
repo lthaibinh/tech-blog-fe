@@ -1,0 +1,16 @@
+
+
+#showHintId {
+    .ant-switch-inner-checked, .ant-switch-inner-unchecked {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .ant-switch-inner-unchecked {
+        margin-top: -30px !important;
+    }
+    .ant-switch-handle {
+        top: 6px !important;
+    }
+}
