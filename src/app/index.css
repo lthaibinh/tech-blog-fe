@@ -1,0 +1,216 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#resizable { width: 150px; height: 150px; padding: 0.5em; }
+#resizable h3 { text-align: center; margin: 0; }
+.ui-widget-content {
+  /* Define your custom styles here */
+  background-color: #fff; /* Background color */
+  color: #333; /* Text color */
+  border: 1px solid #ccc; /* Border */
+  padding: 10px; /* Padding */
+  /* Add more styles as needed */
+}
+/* .resizable {
+  width: 200px;
+  height: 100px;
+  background-color: #ffcc00;
+  border: 1px solid #999;
+  padding: 10px;
+} */
+
+#container {
+  width: 300px;
+  height: 50px;
+  border: 2px solid #ccc;
+  position: relative;
+}
+/* .draggable {
+  width: 50px;
+  height: 50px;
+  background-color: #ffcc00;
+  border: 1px solid #999;
+  position: absolute;
+} */
+
+.logoName {
+  font-family: "cursive";
+}
+/* custom ag grid  */
+.ag-cell,
+.ag-full-width-row .ag-cell-wrapper.ag-row-group {
+  border-right-color: #444 !important;
+  border-bottom-color: #444 !important;
+}
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+.ag-theme-alpine .ag-row-selected,
+.ag-row-selected::before,
+.ag-row-hover,
+.ag-row-hover:not(.ag-full-width-row)::before,
+.ag-row-hover.ag-full-width-row.ag-row-group::before {
+  background-color: white !important;
+  background-image: none !important;
+}
+
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* playlist section  */
+
+.playlist {
+  text-align: left;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.playlist-item {
+  color: #444;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 1em;
+}
+
+.playlist-item.selected {
+  font-weight: bold;
+}
+
+.playlist-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.controls {
+  text-align: left;
+  padding: 1em;
+}
