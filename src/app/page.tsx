@@ -1,5 +1,6 @@
 "use client";
 import { BlogItem } from "@/components/pages/blogs/BlogItem";
+import NewPost from "@/components/pages/blogs/NewPost";
 import { IInfoCard, InfoCard } from "@/components/pages/home/InfoCard";
 import { Button, Col, Grid, Row, Space, Typography } from "antd";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ export default function Home() {
           <BlogItem />
         </Col>
       ))}
+      <NewPost />
     </Row>
   );
 }
