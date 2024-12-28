@@ -26,7 +26,11 @@ import { Input, Select, Space } from "antd";
 const menuItems: MenuProps["items"] = [
   {
     key: "/blogs",
-    label: <Link href={"/"}>Bài viết</Link>,
+    label: <Link href={"/blogs"}>Bài viết</Link>,
+  },
+  {
+    key: "/post-writing",
+    label: <Link href={"/post-writing"}>Viết bài</Link>,
   },
   {
     key: "/questions",

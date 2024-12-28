@@ -3,6 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useSession } from "next-auth/react";
 import { Dispatch, FC } from "react";
+import { LoginModal } from "./LoginModal";
 
 interface ILoginPopup {
 }
@@ -43,14 +44,15 @@ export const LoginPopup: FC<ILoginPopup> = ({
   if (status === "unauthenticated") {
     return (
       <>
-        <Button
+        {/* <Button
           icon={<UserOutlined />}
           onClick={() => {
-            popupCenter("/google-signin", "Sign In with google")
+            // popupCenter("/google-signin", "Sign In with google")
           }}
         >
           Sign In
-        </Button>
+        </Button> */}
+        <LoginModal />
         
       </>
     );
