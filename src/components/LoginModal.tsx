@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
-import { Modal, Form, Input, Button, message } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Modal, Form, Input, Button, message } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { axiosInstance } from "@/utils/axios";
+import { axiosObservable } from "@/utils/axiosObservable";
 
 export const LoginModal = () => {
   const [visible, setVisible] = useState(false);
 
-  // Handle form submission
-  const handleSubmit = (values: any) => {
-    // Simulate an API call for login
-    console.log('Form values: ', values);
-    message.success('Login successful!');
-    setVisible(false);  // Close modal after success
+  const handleSubmit = async (values: any) => {
+    
+    axiosObservable<any>({
+      url: "/identity/auth/token",
+      method: "post",
+      data: {
+        username: values.username,
+        password: values.password,
+      },
+    }).subscribe({
+      next: (data) => {
+        document.cookie = `token=${data.token}; path=/; HttpOnly`;
+        message.success("Login successful!");
+        setVisible(false); // Close modal after success
+      },
+      error: (err) => {
+        console.log("Error:", err);
+        message.error(err.message);
+      },
+      complete: () => console.log("Request complete"),
+    });
   };
 
   // Open the modal
@@ -33,7 +50,7 @@ export const LoginModal = () => {
       {/* Modal Component */}
       <Modal
         title="Login"
-        visible={visible}
+        open={visible}
         onCancel={handleCancel}
         footer={null} // We'll provide our own footer
       >
@@ -51,7 +68,7 @@ export const LoginModal = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input your username!',
+                message: "Please input your username!",
               },
             ]}
           >
@@ -65,7 +82,7 @@ export const LoginModal = () => {
             rules={[
               {
                 required: true,
-                message: 'Please input your password!',
+                message: "Please input your password!",
               },
             ]}
           >
@@ -74,7 +91,7 @@ export const LoginModal = () => {
 
           {/* Submit Button */}
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
               Log In
             </Button>
           </Form.Item>
@@ -83,4 +100,3 @@ export const LoginModal = () => {
     </div>
   );
 };
-
