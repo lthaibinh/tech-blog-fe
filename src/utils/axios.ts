@@ -4,7 +4,7 @@ import Cookie from 'js-cookie';
 
 // Create an Axios instance
 export const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:8888/api/v1', // Set the base URL for your API
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Set the base URL for your API
 });
 
 // Add an interceptor to add the JWT token to every request

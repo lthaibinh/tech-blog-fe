@@ -3,31 +3,44 @@ import { Modal, Form, Input, Button, message } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { axiosInstance } from "@/utils/axios";
 import { axiosObservable } from "@/utils/axiosObservable";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export const LoginModal = () => {
   const [visible, setVisible] = useState(false);
+  //const router = useRouter();
 
   const handleSubmit = async (values: any) => {
-    
-    axiosObservable<any>({
-      url: "/identity/auth/token",
-      method: "post",
-      data: {
-        username: values.username,
-        password: values.password,
-      },
-    }).subscribe({
-      next: (data) => {
-        document.cookie = `token=${data.token}; path=/; HttpOnly`;
-        message.success("Login successful!");
-        setVisible(false); // Close modal after success
-      },
-      error: (err) => {
-        console.log("Error:", err);
-        message.error(err.message);
-      },
-      complete: () => console.log("Request complete"),
+    // axiosObservable<any>({
+    //   url: "/identity/auth/token",
+    //   method: "post",
+    //   data: {
+    //     username: values.username,
+    //     password: values.password,
+    //   },
+    // }).subscribe({
+    //   next: (data) => {
+    //     document.cookie = `token=${data.token}; path=/; HttpOnly`;
+    //     message.success("Login successful!");
+    //     setVisible(false); // Close modal after success
+    //   },
+    //   error: (err) => {
+    //     console.log("Error:", err);
+    //     message.error(err.message);
+    //   },
+    //   complete: () => console.log("Request complete"),
+    // });
+    const result = await signIn("credentials", {
+      redirect: false,
+      username: values.username,
+      password: values.password,
     });
+
+    if (result?.error) {
+      alert("Login failed. Please check your credentials.");
+    } else {
+      //router.push("/dashboard");
+    }
   };
 
   // Open the modal

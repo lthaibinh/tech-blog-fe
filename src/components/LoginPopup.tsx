@@ -8,17 +8,12 @@ import { LoginModal } from "./LoginModal";
 interface ILoginPopup {}
 export const LoginPopup: FC<ILoginPopup> = ({}) => {
   const { data: session, status } = useSession();
-
+  console.log('binhtest session', session)
+  if (session) {
+    return;
+  }
   return (
     <>
-      {/* <Button
-        icon={<UserOutlined />}
-        onClick={() => {
-          // popupCenter("/google-signin", "Sign In with google")
-        }}
-      >
-        Sign In
-      </Button> */}
       <LoginModal />
     </>
   );
