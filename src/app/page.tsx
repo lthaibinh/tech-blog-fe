@@ -1,23 +1,31 @@
-"use client";
+// File: app/page.tsx
 import { BlogItem } from "@/components/pages/blogs/BlogItem";
-import NewPost from "@/components/pages/blogs/NewPost";
-import { IInfoCard, InfoCard } from "@/components/pages/home/InfoCard";
-import { Button, Col, Grid, Row, Space, Typography } from "antd";
-import { useRouter } from "next/navigation";
+import { getAllBlogPost } from "@/services/blogServies";
+import { IBlog } from "@/types/blog";
+import { Col, Row } from "antd";
+import { lastValueFrom } from "rxjs";
 
-const { Title, Paragraph, Text, Link } = Typography;
+export default async function Home() {
+  let blogs: IBlog[] = [];
 
-export default function Home() {
-  const router = useRouter();
+  try {
+    blogs = await lastValueFrom(getAllBlogPost()); // Convert RxJS observable to promise
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+  }
 
   return (
     <Row gutter={[32, 32]}>
-      {new Array(10).fill(0).map((_, i) => (
-        <Col span={12} key={i}>
-          <BlogItem />
+      {blogs.map((item) => (
+        <Col span={12} key={item.id}>
+          <BlogItem
+            id={item.id}
+            title={item.title}
+            content={item.content}
+            author={item.author}
+          />
         </Col>
       ))}
-      <NewPost />
     </Row>
   );
 }

@@ -1,7 +1,10 @@
+'use client';
+import { IBlog } from "@/types/blog";
 import { Avatar, Card, Tag, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
+import { FC } from "react";
 
-export const BlogItem = () => {
+export const BlogItem: FC<IBlog> = ({id, title, content, author}) => {
   return (
     <Card
       hoverable
@@ -15,7 +18,7 @@ export const BlogItem = () => {
       }
     >
       <Typography.Title level={4}>
-        Lazy loading vs. Eager loading
+        {title}
       </Typography.Title>
       <div className="flex flex-wrap gap-2">
         {new Array(5).fill(0).map((_, i) => (
@@ -33,7 +36,7 @@ export const BlogItem = () => {
             src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
           />
         }
-        title="Njong Emy"
+        title={author}
         description="Dec 18, 2024 ⋅ 5 min read"
       />
     </Card>
