@@ -11,7 +11,9 @@ const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [preview, setPreview] = useState("");
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    console.log("binhtest content:", {content});
+  };
 
   const handleEditorChange = (value: string) => {
     setContent(value);
@@ -35,7 +37,7 @@ const NewPost = () => {
           onChange={() => {}}
           options={options}
         />
-        <Button type="primary" icon={<CheckOutlined />}>
+        <Button onClick={handleSubmit} type="primary" icon={<CheckOutlined />}>
           Submit
         </Button>
       </Flex>
