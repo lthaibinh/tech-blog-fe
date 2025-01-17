@@ -2,15 +2,14 @@ import { useMemo, useState } from "react";
 import { MarkdownEditor } from "./MarkdownEditor";
 import { Button, Flex, Input, Select, SelectProps } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
-import { MarkdownPreview } from "./MarkdownPreview";
-import { markdownToHtml } from "@/lib/markdownToHtml";
+
 
 // import MarkdownEditor from "./MarkdownEditor";
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [preview, setPreview] = useState("");
+  // const [preview, setPreview] = useState("");
   const handleSubmit = async () => {
     console.log("binhtest content:", {content});
   };
@@ -45,16 +44,15 @@ const NewPost = () => {
         placeholder="Type your content here..."
         value={content}
         onChange={handleEditorChange} // Update shared content
-        setPreview={setPreview}
       />
       {/* Preview */}
       {/* <div className="w-1/2 p-4">
         <MarkdownPreview content={content} />
       </div> */}
-      <div className="aie-container">
+      <div className="aie-container [&_img]:inline-block">
         <div
           className="aie-content"
-          dangerouslySetInnerHTML={{ __html: preview }}
+          dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
     </Flex>

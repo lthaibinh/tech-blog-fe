@@ -12,10 +12,9 @@ type AIEditorProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
   value?: string;
   onChange?: (val: string) => void;
   options?: Omit<AiEditorOptions, "element">;
-  setPreview: (val: string) => void;
 };
 
-export const MarkdownEditor: FC<AIEditorProps> = ({placeholder, defaultValue, value, onChange, options, setPreview}) => {
+export const MarkdownEditor: FC<AIEditorProps> = ({placeholder, defaultValue, value, onChange, options}) => {
     const divRef = useRef<HTMLDivElement>(null);
     const aiEditorRef = useRef<AiEditor | null>(null);
 
@@ -31,8 +30,7 @@ export const MarkdownEditor: FC<AIEditorProps> = ({placeholder, defaultValue, va
           content: defaultValue,
           onChange: (ed) => {
             if (typeof onChange === "function") {
-              onChange(ed.getMarkdown());
-              setPreview(ed.getHtml());
+              onChange(ed.getHtml());
             }
           },
           toolbarKeys: [
@@ -108,7 +106,7 @@ export const MarkdownEditor: FC<AIEditorProps> = ({placeholder, defaultValue, va
 
     useEffect(() => {
     
-      if (aiEditorRef.current && value !== aiEditorRef.current.getMarkdown()) {
+      if (aiEditorRef.current && value !== aiEditorRef.current.getHtml()) {
         aiEditorRef.current.setContent(value || "");
       }
     }, [value]);
