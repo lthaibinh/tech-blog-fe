@@ -2,7 +2,6 @@
 
 import { FundViewOutlined } from "@ant-design/icons";
 import { AiEditor, AiEditorOptions } from "aieditor";
-import "aieditor/dist/style.css";
 
 import { FC, HTMLAttributes, forwardRef, useEffect, useRef } from "react";
 

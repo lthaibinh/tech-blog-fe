@@ -1,6 +1,5 @@
 // Editor Component
 import { AiEditor, AiEditorOptions } from "aieditor";
-import "aieditor/dist/style.css";
 
 import { useState, useEffect, useRef } from "react";
 

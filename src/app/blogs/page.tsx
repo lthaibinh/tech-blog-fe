@@ -1,4 +1,5 @@
 // File: app/page.tsx
+import { BodyLayout } from "@/components/layouts/BodyLayout";
 import { BlogItem } from "@/components/pages/blogs/BlogItem";
 import { getAllBlogPost } from "@/services/blogServies";
 import { IBlog } from "@/types/blog";
@@ -15,17 +16,22 @@ export default async function Home() {
   }
 
   return (
-    <Row gutter={[32, 32]}>
-      {blogs.map((item) => (
-        <Col span={12} key={item.id}>
-          <BlogItem
-            id={item.id}
-            title={item.title}
-            content={item.content}
-            author={item.author}
-          />
-        </Col>
-      ))}
-    </Row>
+    <>
+      <div className=" w-full mx-auto h-96 text-left bg-homepage bg-cover bg-no-repeat bg-right items-start justify-center" />
+      <BodyLayout>
+        <Row gutter={[32, 32]}>
+          {blogs.map((item) => (
+            <Col span={12} key={item.id}>
+              <BlogItem
+                id={item.id}
+                title={item.title}
+                content={item.content}
+                author={item.author}
+              />
+            </Col>
+          ))}
+        </Row>
+      </BodyLayout>
+    </>
   );
 }
