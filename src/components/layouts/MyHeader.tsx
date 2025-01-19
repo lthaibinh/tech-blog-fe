@@ -22,6 +22,8 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 import { LoginPopup } from "../LoginPopup";
 import { Input, Select, Space } from "antd";
+import { UserInfoDrawer } from "../pages/UserInfoDrawer";
+import { NotificationDrawer } from "../pages/NotificationDrawer";
 
 const menuItems: MenuProps["items"] = [
   {
@@ -92,41 +94,46 @@ export const MyHeader = () => {
           items={menuItems}
           style={{ flex: 1, minWidth: 0, justifyContent: "end" }}
         />
-        {session && (
-          <Popover
-            content={
-              <Button
-                className="w-full !bg-red-600 !text-white"
-                icon={<LogoutOutlined />}
-                onClick={() => {
-                  hide();
-                  signOut();
-                }}
-              >
-                Sign Out
-              </Button>
-            }
-            title={session?.user?.name}
-            trigger="click"
-            open={open}
-            onOpenChange={handleOpenChange}
-          >
-            <Avatar
-              size={32}
-              icon={
-                session?.user?.image ? (
-                  <Image
-                    preview={false}
-                    width={32}
-                    src={session?.user?.image || ""}
-                  />
-                ) : (
-                  <UserOutlined />
-                )
-              }
-            />
-          </Popover>
-        )}
+
+        <div className="flex gap-4">
+          <NotificationDrawer />
+          {true && (
+            // <Popover
+            //   content={
+            //     <Button
+            //       className="w-full !bg-red-600 !text-white"
+            //       icon={<LogoutOutlined />}
+            //       onClick={() => {
+            //         hide();
+            //         signOut();
+            //       }}
+            //     >
+            //       Sign Out
+            //     </Button>
+            //   }
+            //   title={session?.user?.name}
+            //   trigger="click"
+            //   open={open}
+            //   onOpenChange={handleOpenChange}
+            // >
+            //   <Avatar
+            //     size={32}
+            //     icon={
+            //       session?.user?.image ? (
+            //         <Image
+            //           preview={false}
+            //           width={32}
+            //           src={session?.user?.image || ""}
+            //         />
+            //       ) : (
+            //         <UserOutlined />
+            //       )
+            //     }
+            //   />
+            // </Popover>
+            <UserInfoDrawer />
+          )}
+        </div>
         <LoginPopup />
       </Header>
     </div>

@@ -4,6 +4,7 @@
 
 #resizable { width: 150px; height: 150px; padding: 0.5em; }
 #resizable h3 { text-align: center; margin: 0; }
+
 .ui-widget-content {
   /* Define your custom styles here */
   background-color: #fff; /* Background color */
@@ -148,7 +149,7 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  /* font: inherit; */
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -213,4 +214,8 @@ table {
 .controls {
   text-align: left;
   padding: 1em;
+}
+
+p {
+  line-height: 21px;
 }
