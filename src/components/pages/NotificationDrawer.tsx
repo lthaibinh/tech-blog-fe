@@ -4,39 +4,65 @@ import {
   Avatar,
   Badge,
   Button,
-  Divider,
   Drawer,
   Flex,
-  Image,
   List,
-  Radio,
-  Space,
   Tabs,
+  Tag,
   Typography,
 } from "antd";
 import ProfileIcon from "@/assets/icons/profile.svg";
-import SettingIcon from "@/assets/icons/setting.svg";
-import Icon, { UserOutlined } from "@ant-design/icons";
 import BellIcon from "@/assets/icons/bell.svg";
-const mockupData: { title: string; icon: string }[] = [
-  {
-    title: "profile",
+const mockupData: { title: string; icon: string }[] = new Array(100)
+  .fill(0)
+  .map((_, index) => ({
+    title: "Anderlee sent you a friend request " + index,
     icon: ProfileIcon,
-  },
-  {
-    title: "setting",
-    icon: SettingIcon,
-  },
-];
+  }));
 const items: TabsProps["items"] = [
   {
     key: "1",
-    label: "All",
-    children: "Content of Tab Pane 1",
+    label: (
+      <div>
+        <Typography.Text>All</Typography.Text>
+        <Tag color="processing" className="!ml-1">
+          20
+        </Tag>
+      </div>
+    ),
+    children: (
+      <List
+        className="h-[calc(100vh-156px)] overflow-y-scroll"
+        dataSource={mockupData}
+        renderItem={(item) => (
+          <List.Item>
+            <Flex gap={"middle"}>
+              <Avatar
+                size={32}
+                src="https://assets.minimals.cc/public/assets/images/mock/avatar/avatar-25.webp"
+              />
+              <Flex vertical>
+                <Typography.Text>{item.title}</Typography.Text>
+                <Typography.Text type="secondary">
+                  {"13 minutes"}
+                </Typography.Text>
+              </Flex>
+            </Flex>
+          </List.Item>
+        )}
+      />
+    ),
   },
   {
     key: "2",
-    label: "Unread",
+    label: (
+      <div>
+        <Typography.Text>Unread</Typography.Text>
+        <Tag color="processing" className="!ml-1">
+          20
+        </Tag>
+      </div>
+    ),
     children: "Content of Tab Pane 2",
   },
 ];
@@ -56,6 +82,8 @@ export const NotificationDrawer: React.FC = () => {
     setPlacement(e.target.value);
   };
 
+ 
+
   return (
     <>
       <Badge count={5}>
@@ -66,37 +94,17 @@ export const NotificationDrawer: React.FC = () => {
         />
       </Badge>
       <Drawer
+        className="[&_.ant-drawer-body]:!pr-0"
         placement={"right"}
         closable={false}
         onClose={onClose}
         open={open}
       >
-        <Typography.Title level={3}>Notification</Typography.Title>
-        <Tabs defaultActiveKey="1" items={items} />
-        <Flex vertical justify="center" align="center" className="header-info">
-          <Avatar
-            size={64}
-            src="https://assets.minimals.cc/public/assets/images/mock/avatar/avatar-25.webp"
-          />
-          <Typography.Title level={5}>Binh Le</Typography.Title>
-          <Typography.Text>binhle@gmail.com</Typography.Text>
-        </Flex>
-        <Divider />
-        <List
-          dataSource={mockupData}
-          renderItem={(item) => (
-            <List.Item>
-              <Flex gap={"small"}>
-                <span className="text-[#637381]">{<item.icon />}</span>{" "}
-                {item.title}
-              </Flex>
-            </List.Item>
-          )}
-        />
-        <Divider />
-        <Button className="w-full" type="primary" danger>
-          Logout
-        </Button>
+        <Typography.Title className="" level={3}>
+          Notification
+        </Typography.Title>
+        <Tabs defaultActiveKey="1" items={items}  />
+        
       </Drawer>
     </>
   );
