@@ -6,6 +6,7 @@ import {
   Dropdown,
   Image,
   Layout,
+  List,
   Menu,
   MenuProps,
   Popover,
@@ -25,7 +26,7 @@ import { Input, Select, Space } from "antd";
 import { UserInfoDrawer } from "../pages/UserInfoDrawer";
 import { NotificationDrawer } from "../pages/NotificationDrawer";
 
-const menuItems: MenuProps["items"] = [
+const menuItems: { key: string; label: React.ReactNode }[] = [
   {
     key: "/blogs",
     label: <Link href={"/blogs"}>Bài viết</Link>,
@@ -85,15 +86,21 @@ export const MyHeader = () => {
         <Space.Compact size="large" className="mx-10 w-80">
           <Input addonBefore={<SearchOutlined />} placeholder="large size" />
         </Space.Compact>
+        <div className="flex-1">
+          <Menu
+            theme="light"
+            mode="horizontal"
+            className="!bg-transparent"
+            defaultSelectedKeys={[parts && parts.length > 0 ? parts[0] : "/"]}
+            items={menuItems}
+          />
+        </div>
 
-        <Menu
-          theme="light"
-          mode="horizontal"
-          className="!bg-transparent"
-          defaultSelectedKeys={[parts && parts.length > 0 ? parts[0] : "/"]}
-          items={menuItems}
-          style={{ flex: 1, minWidth: 0, justifyContent: "end" }}
-        />
+        {/* <List
+          
+          dataSource={menuItems}
+          renderItem={(item) => <List.Item>{item.label}</List.Item>}
+        ></List> */}
 
         <div className="flex gap-4">
           <NotificationDrawer />

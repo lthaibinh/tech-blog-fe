@@ -41,11 +41,11 @@ const Page: React.FC<PageProps> = ({ params }) => {
   const { id } = params;
 
   return (
-    <div className="p-4">
+    <div className="">
       <div className="bg-[#4587e5] flex w-full mx-auto h-96 text-left bg-cover bg-no-repeat bg-right justify-center items-center">
         <h1 className="text-4xl font-bold">{mockPost.title}</h1>
       </div>
-      <div className="flex">
+      <div className="max-w-[1200px] flex mx-auto">
         <div className="left-content-container w-96">
           <TableOfContents data={data} />
         </div>

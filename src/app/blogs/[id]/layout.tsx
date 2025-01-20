@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Viewport } from "next";
-
-import { MainLayout } from "@/components/layouts/MainLayout";
-// import "../../index.css";
-import { ConfigProvider } from "antd";
-import { themeConfig } from "@/components/ThemeConfig";
 import { getServerSession } from "next-auth";
-import NextAuthProvider from "@/components/NextAuthProvider";
-import Script from "next/script";
-import { DetailsLayout } from "@/components/layouts/DetailsLayout";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Practice and improve English listening skills effectively",
