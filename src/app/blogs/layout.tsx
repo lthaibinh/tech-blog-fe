@@ -45,5 +45,5 @@ export default function RootLayout({
 }) {
   const session = getServerSession();
 
-  return <div>{children}</div>;
+  return <div className="!bg-white">{children}</div>;
 }

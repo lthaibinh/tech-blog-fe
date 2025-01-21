@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-#resizable { width: 150px; height: 150px; padding: 0.5em; }
-#resizable h3 { text-align: center; margin: 0; }
+#resizable {
+  width: 150px;
+  height: 150px;
+  padding: 0.5em;
+}
+#resizable h3 {
+  text-align: center;
+  margin: 0;
+}
 
 .ui-widget-content {
   /* Define your custom styles here */
@@ -56,8 +63,6 @@
   background-color: white !important;
   background-image: none !important;
 }
-
-
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -215,7 +220,33 @@ table {
   text-align: left;
   padding: 1em;
 }
-
+/* custom css */
 p {
   line-height: 21px;
+}
+
+/* scroll bar  */
+
+
+/* Target the scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Width for vertical scrollbar */
+  height: 6px; /* Height for horizontal scrollbar */
+}
+
+/* Track of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Background of the track */
+  border-radius: 10px; /* Optional rounded corners */
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
 }
