@@ -15,3 +15,8 @@ export interface IUploadFileRes {
         createdAt: string
     }
 }
+export interface IMetaRes {
+    id: number;
+    key: string;
+    value: string
+}
