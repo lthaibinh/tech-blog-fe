@@ -104,7 +104,7 @@ export const MyHeader = () => {
 
         <div className="flex gap-4">
           <NotificationDrawer />
-          {true && (
+          {session && (
             // <Popover
             //   content={
             //     <Button

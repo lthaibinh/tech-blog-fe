@@ -22,12 +22,7 @@ export default async function Home() {
         <Row gutter={[32, 32]}>
           {blogs.map((item) => (
             <Col span={12} key={item.id}>
-              <BlogItem
-                id={item.id}
-                title={item.title}
-                content={item.content}
-                author={item.author}
-              />
+              <BlogItem {...item} />
             </Col>
           ))}
         </Row>

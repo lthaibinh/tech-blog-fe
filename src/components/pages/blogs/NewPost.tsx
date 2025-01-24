@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useMemo, useState } from "react";
 import { MarkdownEditor } from "./MarkdownEditor";
 import {
@@ -12,7 +13,7 @@ import {
 } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
-import { getAllBlogPost, getAllMeta } from "@/services/blogServies";
+import { createNewPost, getAllBlogPost, getAllMeta } from "@/services/blogServies";
 
 // import MarkdownEditor from "./MarkdownEditor";
 type FieldType = {
@@ -21,7 +22,7 @@ type FieldType = {
   content?: string;
   metaDescription?: string;
   metaTitle: string;
-  metaId: number;
+  metaIds: number[];
 };
 const NewPost = () => {
   const [form] = Form.useForm();
@@ -57,6 +58,15 @@ const NewPost = () => {
   }, []);
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     console.log("Success:", values);
+    createNewPost(values).subscribe({
+      next: (res) => {
+        console.log("binhtet res", res);
+        setOptions(res);
+      },
+      error: (err) => {
+        console.log("err", err);
+      },
+    });
   };
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -121,7 +131,7 @@ const NewPost = () => {
       </div>
       <Form.Item<FieldType>
         // label="Description"
-        name="metaId"
+        name="metaIds"
         rules={[{ required: true, message: "Chọn Meta" }]}
       >
         <Select

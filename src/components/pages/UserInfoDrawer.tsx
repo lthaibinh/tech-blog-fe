@@ -15,6 +15,7 @@ import {
 import ProfileIcon from "@/assets/icons/profile.svg";
 import SettingIcon from "@/assets/icons/setting.svg";
 import Icon, { UserOutlined } from "@ant-design/icons";
+import { signOut } from "next-auth/react";
 
 const mockupData: { title: string; icon: string }[] = [
   {
@@ -75,8 +76,15 @@ export const UserInfoDrawer: React.FC = () => {
             </List.Item>
           )}
         />
-            <Divider />
-        <Button className="w-full" type="primary" danger>
+        <Divider />
+        <Button
+          onClick={() => {
+            signOut();
+          }}
+          className="w-full"
+          type="primary"
+          danger
+        >
           Logout
         </Button>
       </Drawer>

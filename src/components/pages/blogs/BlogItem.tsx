@@ -1,10 +1,10 @@
-'use client';
+"use client";
 import { IBlog } from "@/types/blog";
 import { Avatar, Card, Tag, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
 import { FC } from "react";
 
-export const BlogItem: FC<IBlog> = ({id, title, content, author}) => {
+export const BlogItem: FC<IBlog> = ({ id, title, description, metas }) => {
   return (
     <Card
       hoverable
@@ -17,17 +17,14 @@ export const BlogItem: FC<IBlog> = ({id, title, content, author}) => {
         />
       }
     >
-      <Typography.Title level={4}>
-        {title}
-      </Typography.Title>
+      <Typography.Title level={4}>{title}</Typography.Title>
       <div className="flex flex-wrap gap-2">
-        {new Array(5).fill(0).map((_, i) => (
-          <Tag key={i}>{"react" + i}</Tag>
+        {metas.map((meta, i) => (
+          <Tag key={meta.id}>{meta.value}</Tag>
         ))}
       </div>
       <Typography.Paragraph className="mt-2">
-        In this guide, explore lazy loading and error loading as two techniques
-        for fetching data in React apps.
+        {description}
       </Typography.Paragraph>
       <Meta
         avatar={
@@ -36,7 +33,7 @@ export const BlogItem: FC<IBlog> = ({id, title, content, author}) => {
             src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
           />
         }
-        title={author}
+        title={"binhle"} // misssing
         description="Dec 18, 2024 ⋅ 5 min read"
       />
     </Card>

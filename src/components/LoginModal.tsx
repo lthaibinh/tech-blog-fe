@@ -56,7 +56,7 @@ export const LoginModal = () => {
   return (
     <div>
       {/* Button to open modal */}
-      <Button type="primary" onClick={showModal} icon={<UserOutlined />}>
+      <Button id="login-button" type="primary" onClick={showModal} icon={<UserOutlined />}>
         Login
       </Button>
 
