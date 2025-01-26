@@ -28,7 +28,7 @@ const mockupData: { title: string; icon: string }[] = [
   },
 ];
 export const UserInfoDrawer: React.FC = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState<DrawerProps["placement"]>("left");
 
   const showDrawer = () => {

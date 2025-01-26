@@ -1,6 +1,9 @@
+import { getBlogPostDetails } from "@/services/blogServies";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import { getServerSession } from "next-auth";
+import { cloneElement } from "react";
+import { lastValueFrom } from "rxjs";
 
 export const metadata: Metadata = {
   title: "Practice and improve English listening skills effectively",
@@ -27,12 +30,15 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params 
 }: {
   children: React.ReactNode;
+  params: { id: string };
 }) {
   const session = getServerSession();
+  
 
   return (
     <div>

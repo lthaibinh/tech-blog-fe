@@ -2,9 +2,13 @@
 import { IBlog } from "@/types/blog";
 import { Avatar, Card, Tag, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
+import { useRouter } from 'next/navigation';
+
 import { FC } from "react";
 
 export const BlogItem: FC<IBlog> = ({ id, title, description, metas }) => {
+  const router = useRouter();
+
   return (
     <Card
       hoverable
@@ -16,10 +20,13 @@ export const BlogItem: FC<IBlog> = ({ id, title, description, metas }) => {
           src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
         />
       }
+      onClick={() => {
+        router.push(`/blogs/${id}`);
+      }}
     >
       <Typography.Title level={4}>{title}</Typography.Title>
       <div className="flex flex-wrap gap-2">
-        {metas.map((meta, i) => (
+        {metas?.map((meta, i) => (
           <Tag key={meta.id}>{meta.value}</Tag>
         ))}
       </div>

@@ -1,4 +1,6 @@
 import { TableOfContents } from "@/components/pages/blogs/TableOfContents";
+import { getBlogPostDetails } from "@/services/blogServies";
+import { IBlog } from "@/types/blog";
 import { LikeOutlined, UserOutlined } from "@ant-design/icons";
 import {
   Anchor,
@@ -14,6 +16,7 @@ import {
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import Title from "antd/es/typography/Title";
+import { lastValueFrom } from "rxjs";
 const { Link } = Anchor;
 
 interface PageProps {
@@ -28,48 +31,38 @@ const mockPost = {
 };
 // get all h1 string
 const h1Regex = /<h1[^>]*>(.*?)<\/h1>/g;
-const h1Texts = [];
-let match;
-while ((match = h1Regex.exec(mockPost.content)) !== null) {
-  h1Texts.push(match[1].trim());
-}
+
 // end get all h1 string
 
-const data = h1Texts;
-const Text = Typography.Text;
-const Page: React.FC<PageProps> = ({ params }) => {
+const Page: React.FC<PageProps> = async ({ params }) => {
   const { id } = params;
-
+  const post = await lastValueFrom(getBlogPostDetails({ id }));
+  console.log("binhtest res", post);
+  const h1Texts = [];
+  let match;
+  while ((match = h1Regex.exec(post.content)) !== null) {
+    h1Texts.push(match[1].trim());
+  }
   return (
     <div className="">
       <div className="bg-[#4587e5] flex w-full mx-auto h-96 text-left bg-cover bg-no-repeat bg-right justify-center items-center">
-        <h1 className="text-4xl font-bold">{mockPost.title}</h1>
+        <h1 className="text-4xl font-bold">{post.title}</h1>
       </div>
       <div className="max-w-[1200px] flex mx-auto">
         <div className="left-content-container w-96">
-          <TableOfContents data={data} />
+          <TableOfContents data={h1Texts} />
         </div>
         <div className="right-content-container aie-container [&_img]:inline-block flex-1 flex flex-col gap-4 pb-10">
           <div className="aie-content">
-            <div dangerouslySetInnerHTML={{ __html: mockPost.content }} />
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
           <div className="flex flex-col gap-4 px-4">
             <Flex gap="4px 0">
-              <Tag color="processing" className="!p-1">
-                Technology
-              </Tag>
-              <Tag color="processing" className="!p-1">
-                Health and Wellness
-              </Tag>
-              <Tag color="processing" className="!p-1">
-                Travel
-              </Tag>
-              <Tag color="processing" className="!p-1">
-                Finance
-              </Tag>
-              <Tag color="processing" className="!p-1">
-                Education
-              </Tag>
+              {post.metas.map((meta) => (
+                <Tag color="processing" className="!p-1">
+                  {meta.value}
+                </Tag>
+              ))}
             </Flex>
             <Statistic
               value={1128}

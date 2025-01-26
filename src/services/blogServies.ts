@@ -10,6 +10,13 @@ export const getAllBlogPost = () => {
   });
 };
 
+export const getBlogPostDetails = ({ id }: { id: string }) => {
+  return axiosObservable<IBlogResponse>({
+    method: "get",
+    url: "/post/posts" + "/" + id,
+  });
+};
+
 export const getAllMeta = () => {
   return axiosObservable<IMetaRes[]>({ method: "get", url: "/post/meta" });
 };

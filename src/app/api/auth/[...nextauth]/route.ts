@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { axiosInstance } from "@/utils/axios";
+import axios from "axios";
 
 // Define the refreshAccessToken function for token refreshing
 async function refreshAccessToken(token: any) {
@@ -51,15 +52,22 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const data: { token: string; expiryTime: Date } =
-            await axiosInstance.post(
-              process.env.NEXT_PUBLIC_API_BASE_URL + "/identity/auth/token",
-              {
-                username: credentials?.username,
-                password: credentials?.password,
-              }
-            );
-          const { token } = data;
+          const res: {
+            data: {
+              data: {
+                token: string;
+                expiryTime: Date;
+              };
+            };
+          } = await axios.post(
+            process.env.NEXT_PUBLIC_API_BASE_URL + "/identity/auth/token",
+            {
+              username: credentials?.username,
+              password: credentials?.password,
+            }
+          );
+          const { token } = res.data.data;
+          console.log("binhtest data final", token);
           if (token) {
             return {
               id: credentials?.username ?? "",

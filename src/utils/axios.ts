@@ -12,13 +12,17 @@ export const axiosInstance: AxiosInstance = axios.create({
 // Add an interceptor to add the JWT token to every request
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const session = await getSession(); // Retrieve the session
-    const serverSideSession = await getServerSession(authOptions);
-    const { accessToken } = session || serverSideSession || {};
+    let session = null; //await getSession(); // Retrieve the session
+    if (typeof window !== "undefined") {
+      session = await getSession();
+    } else {
+      session = await getServerSession(authOptions);
+    }
+    const { accessToken } = session || {}; // Extract the JWT from the session
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`; // Attach JWT to Authorization header
     }
-    console.log('Config Headers:', config.headers);
+    console.log("Config Headers:", config.headers);
 
     return config;
   },
