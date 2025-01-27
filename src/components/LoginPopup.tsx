@@ -8,7 +8,6 @@ import { LoginModal } from "./LoginModal";
 interface ILoginPopup {}
 export const LoginPopup: FC<ILoginPopup> = ({}) => {
   const { data: session, status } = useSession();
-  console.log('binhtest session', session)
   if (session) {
     return;
   }

@@ -11,6 +11,13 @@ export interface IBlogResponse {
   }[];
   metaTitle: string;
   metaDescription: string;
+  userProfile: {
+    id: number;
+    username: string;
+    fullname: string;
+    dob: string;
+    city: string;
+  };
 }
 export interface IUploadFileRes {
   status: number;

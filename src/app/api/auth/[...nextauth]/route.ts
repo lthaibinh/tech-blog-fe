@@ -67,7 +67,6 @@ export const authOptions: NextAuthOptions = {
             }
           );
           const { token } = res.data.data;
-          console.log("binhtest data final", token);
           if (token) {
             return {
               id: credentials?.username ?? "",

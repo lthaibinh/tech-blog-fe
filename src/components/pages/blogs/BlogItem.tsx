@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 import { FC } from "react";
 
-export const BlogItem: FC<IBlog> = ({ id, title, description, metas }) => {
+export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile }) => {
   const router = useRouter();
 
   return (
@@ -40,7 +40,7 @@ export const BlogItem: FC<IBlog> = ({ id, title, description, metas }) => {
             src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
           />
         }
-        title={"binhle"} // misssing
+        title={userProfile.fullname} // misssing
         description="Dec 18, 2024 ⋅ 5 min read"
       />
     </Card>

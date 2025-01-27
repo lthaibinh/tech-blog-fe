@@ -37,7 +37,6 @@ const h1Regex = /<h1[^>]*>(.*?)<\/h1>/g;
 const Page: React.FC<PageProps> = async ({ params }) => {
   const { id } = params;
   const post = await lastValueFrom(getBlogPostDetails({ id }));
-  console.log("binhtest res", post);
   const h1Texts = [];
   let match;
   while ((match = h1Regex.exec(post.content)) !== null) {
