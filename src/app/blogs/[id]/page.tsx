@@ -1,3 +1,4 @@
+import { ParentComment } from "@/components/pages/blogs/ParentComment";
 import { TableOfContents } from "@/components/pages/blogs/TableOfContents";
 import { getBlogPostDetails } from "@/services/blogServies";
 import { IBlog } from "@/types/blog";
@@ -86,46 +87,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
                 <Button type="primary">Post comment</Button>
               </Flex>
               <div className="comment-section-details flex flex-col gap-4">
-                <Flex className="gap-2">
-                  <Avatar
-                    size={48}
-                    src="https://assets.minimals.cc/public/assets/images/mock/avatar/avatar-25.webp"
-                  />
-                  <Flex vertical>
-                    <Flex vertical justify="space-evenly" className="h-12">
-                      <p className="font-bold">Jayvion Simon</p>
-                      <p className="text-gray-700">18 Jan 2025</p>
-                    </Flex>
-                    <p className="mt-1">
-                      She eagerly opened the gift, her eyes sparkling with
-                      excitement.
-                      <br />
-                      The old oak tree stood tall and majestic, its branches
-                      swaying gently in the breeze.
-                    </p>
-                  </Flex>
-                </Flex>
-                <Divider />
-                <Flex className="gap-2">
-                  <Avatar
-                    size={48}
-                    src="https://assets.minimals.cc/public/assets/images/mock/avatar/avatar-25.webp"
-                  />
-                  <Flex vertical>
-                    <Flex vertical justify="space-evenly" className="h-12">
-                      <p className="font-bold">Jayvion Simon</p>
-                      <p className="text-gray-700">18 Jan 2025</p>
-                    </Flex>
-                    <p className="mt-1">
-                      She eagerly opened the gift, her eyes sparkling with
-                      excitement.
-                      <br />
-                      The old oak tree stood tall and majestic, its branches
-                      swaying gently in the breeze.
-                    </p>
-                  </Flex>
-                </Flex>
-                <Divider />
+                <ParentComment postId={post.id} />
               </div>
             </div>
           </div>

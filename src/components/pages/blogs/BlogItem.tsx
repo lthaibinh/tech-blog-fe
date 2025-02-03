@@ -3,12 +3,12 @@ import { IBlog } from "@/types/blog";
 import { Avatar, Card, Tag, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useRouter } from 'next/navigation';
-
+import { format } from "date-fns";
 import { FC } from "react";
 
-export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile }) => {
+export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile,updatedDate  }) => {
   const router = useRouter();
-
+  const formatedUpdatedDate = format(new Date(updatedDate), "dd-MM-yyyy HH:mm:ss")
   return (
     <Card
       hoverable
@@ -37,11 +37,11 @@ export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile
         avatar={
           <Avatar
             className="!h-9 !w-9"
-            src="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+            src={userProfile.avatarUrl ?? "https://api.dicebear.com/7.x/miniavs/svg?seed=8"}
           />
         }
         title={userProfile.fullname} // misssing
-        description="Dec 18, 2024 ⋅ 5 min read"
+        description={formatedUpdatedDate} // missing
       />
     </Card>
   );

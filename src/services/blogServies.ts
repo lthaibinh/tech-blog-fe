@@ -1,4 +1,4 @@
-import { IBlogResponse, IMetaRes } from "@/types/api";
+import { IBlogResponse, IComments, IMetaRes, IPagableRes } from "@/types/api";
 import { CreationPostRequest } from "@/types/request/CreationPostRequest.type";
 import { axiosInstance } from "@/utils/axios";
 import { axiosObservable } from "@/utils/axiosObservable";
@@ -28,3 +28,16 @@ export const createNewPost = (body: CreationPostRequest) => {
     data: body,
   });
 };
+
+export const getCommentsByPostId = (postId: number) => {
+  return axiosObservable<IPagableRes<IComments[]>>({
+    method: "get",
+    url: `/post/comments/${postId}`,
+  });
+}
+export const getCommentsByParentid = ({parentId, postId}: {parentId: number, postId: number}) => {
+  return axiosObservable<IPagableRes<IComments[]>>({
+    method: "get",
+    url: `/post/comments/${postId}/${parentId}`,
+  });
+}
