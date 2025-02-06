@@ -6,14 +6,10 @@ import "aieditor/dist/style.css";
 import { MainLayout } from "@/components/layouts/MainLayout";
 import "./index.css";
 import "./layout.scss";
-import { ConfigProvider } from "antd";
+import {  ConfigProvider } from "antd";
 import { themeConfig } from "@/components/ThemeConfig";
-import { getServerSession } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import NextAuthProvider from "@/components/NextAuthProvider";
 import Script from "next/script";
-import Head from "next/head";
-import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -46,8 +42,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = getServerSession();
-
   return (
     <html lang="en">
       <head>
@@ -66,6 +60,7 @@ export default function RootLayout({
           src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
           strategy="beforeInteractive"
         ></Script>
+
         <AntdRegistry>
           <ConfigProvider theme={themeConfig}>
             <NextAuthProvider>

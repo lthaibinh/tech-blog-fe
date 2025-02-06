@@ -1,3 +1,4 @@
+import { ToastNotification } from "@/components/NotificationProvider";
 import { ParentComment } from "@/components/pages/blogs/ParentComment";
 import { TableOfContents } from "@/components/pages/blogs/TableOfContents";
 import { getBlogPostDetails } from "@/services/blogServies";
@@ -9,6 +10,7 @@ import {
   Badge,
   Button,
   Divider,
+  Empty,
   Flex,
   List,
   Statistic,
@@ -37,7 +39,34 @@ const h1Regex = /<h1[^>]*>(.*?)<\/h1>/g;
 
 const Page: React.FC<PageProps> = async ({ params }) => {
   const { id } = params;
-  const post = await lastValueFrom(getBlogPostDetails({ id }));
+  let toastProps = {
+    type: "",
+    message: "",
+    description: "",
+  };
+  const post = await lastValueFrom(getBlogPostDetails({ id })).catch(
+    (error) => {
+      console.error("Error fetching post details:", error);
+      toastProps = {
+        type: "error",
+        message: "Error fetching blogs",
+        description: error.message,
+      };
+      return null;
+    }
+  );
+  if (!post) {
+    return (
+      <>
+        <ToastNotification
+          type={toastProps.type as any}
+          message={toastProps.message}
+          description={toastProps.description}
+        />
+        <Empty />
+      </>
+    );
+  }
   const h1Texts = [];
   let match;
   while ((match = h1Regex.exec(post.content)) !== null) {

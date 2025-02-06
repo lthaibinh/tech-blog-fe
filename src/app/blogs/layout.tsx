@@ -43,7 +43,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = getServerSession();
 
   return <div className="!bg-white">{children}</div>;
 }
