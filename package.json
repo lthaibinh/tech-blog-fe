@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -49,6 +49,7 @@
     "@types/react-dom": "18.2.15",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.9",
+    "cross-env": "^7.0.3",
     "eslint": "8.54.0",
     "eslint-config-next": "14.0.3",
     "js-cookie": "^3.0.5",

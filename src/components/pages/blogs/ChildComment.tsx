@@ -35,7 +35,7 @@ export const ChildComment: React.FC<Iprops> = async (props) => {
           "dd-MM-yyyy HH:mm:ss"
         );
         return (
-          <Flex className="gap-2">
+          <Flex key={comment.id} className="gap-2">
             <Avatar size={48} src={comment.userProfile.avatarUrl} />
             <Flex vertical>
               <Flex vertical justify="space-evenly" className="h-12">

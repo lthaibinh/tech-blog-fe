@@ -1,10 +1,7 @@
-// "use client"; // Next.JS
-
+"use client"; 
 import { IUploadFileRes } from "@/types/api";
-import { FundViewOutlined } from "@ant-design/icons";
 import { AiEditor, AiEditorOptions } from "aieditor";
-
-import { FC, HTMLAttributes, forwardRef, useEffect, useRef } from "react";
+import { FC, HTMLAttributes,  useEffect, useRef } from "react";
 
 type AIEditorProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
   placeholder?: string;

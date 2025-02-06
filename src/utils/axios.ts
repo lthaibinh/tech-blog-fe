@@ -22,8 +22,7 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`; // Attach JWT to Authorization header
     }
-    console.log("Config Headers:", config.headers);
-
+    console.info("config data", config);
     return config;
   },
   (error) => {

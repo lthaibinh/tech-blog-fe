@@ -1,5 +1,5 @@
-'use client';
-import { useEffect, useMemo, useState } from "react";
+"use client"; 
+import { useEffect, useState } from "react";
 import { MarkdownEditor } from "./MarkdownEditor";
 import {
   Button,
@@ -11,11 +11,9 @@ import {
   SelectProps,
   Typography,
 } from "antd";
-import { CheckOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
-import { createNewPost, getAllBlogPost, getAllMeta } from "@/services/blogServies";
+import { createNewPost, getAllMeta } from "@/services/blogServies";
 
-// import MarkdownEditor from "./MarkdownEditor";
 type FieldType = {
   title?: string;
   description?: string;

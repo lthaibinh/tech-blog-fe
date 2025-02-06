@@ -1,11 +1,10 @@
-// File: app/page.tsx
+
 import { BodyLayout } from "@/components/layouts/BodyLayout";
 import { BlogItem } from "@/components/pages/blogs/BlogItem";
 import { getAllBlogPost } from "@/services/blogServies";
 import { IBlog } from "@/types/blog";
-import { Col, notification, Row } from "antd";
+import { Col, Row } from "antd";
 import { lastValueFrom } from "rxjs";
-import dynamic from "next/dynamic";
 import { ToastNotification } from "@/components/NotificationProvider";
 import { Empty } from "antd";
 export default async function Home() {

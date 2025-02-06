@@ -8,7 +8,7 @@ import { FC } from "react";
 
 export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile,updatedDate  }) => {
   const router = useRouter();
-  const formatedUpdatedDate = format(new Date(updatedDate), "dd-MM-yyyy HH:mm:ss")
+  const formatedUpdatedDate = updatedDate ? format(new Date(updatedDate), "dd-MM-yyyy HH:mm:ss") : "";
   return (
     <Card
       hoverable

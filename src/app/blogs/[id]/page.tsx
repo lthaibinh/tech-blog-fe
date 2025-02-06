@@ -88,7 +88,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
           <div className="flex flex-col gap-4 px-4">
             <Flex gap="4px 0">
               {post.metas.map((meta) => (
-                <Tag color="processing" className="!p-1">
+                <Tag key={meta.id} color="processing" className="!p-1">
                   {meta.value}
                 </Tag>
               ))}
