@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  fe-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile  
+    image: fe-img:latest
+    ports:
+      - "3000:3000"  # Mapping port 3000 từ container ra host
+    environment:
+      - NODE_ENV=production
+    networks:
+      - mico-tech-blog_blog-app-network
+
+networks:
+  mico-tech-blog_blog-app-network:
+    external: true
