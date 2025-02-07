@@ -1,35 +1,28 @@
-# Build BASE
-FROM node:20-alpine as BASE
-
+# Stage 1: Base (Cài đặt dependencies)
+FROM node:20-alpine AS BASE
 WORKDIR /app
-COPY package.json ./
-RUN apk add --no-cache git \
-    && yarn --frozen-lockfile \
-    && yarn cache clean
+COPY package.json yarn.lock ./
+RUN apk add --no-cache git && \
+    yarn install --frozen-lockfile && \
+    yarn cache clean
 
-# Build Image
+# Stage 2: Build (Biên dịch Next.js)
 FROM node:20-alpine AS BUILD
-
 WORKDIR /app
 COPY --from=BASE /app/node_modules ./node_modules
-COPY . .
-RUN apk add --no-cache git curl \
-    && yarn build \
-    && cd .next/standalone 
+COPY . . 
+RUN apk add --no-cache git curl && \
+    yarn build 
 
-# Build production
+# Stage 3: Production (Chạy app)
 FROM node:20-alpine AS PRODUCTION
-
 WORKDIR /app
 
+# Chỉ copy các file cần thiết để chạy app
 COPY --from=BUILD /app/public ./public
 COPY --from=BUILD /app/next.config.js ./
-
-# Set mode "standalone" in file "next.config.js"
 COPY --from=BUILD /app/.next/standalone ./
 COPY --from=BUILD /app/.next/static ./.next/static
 
 EXPOSE 3000
-
-WORKDIR /app
 CMD ["node", "server.js"]
