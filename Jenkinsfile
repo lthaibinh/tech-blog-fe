@@ -24,6 +24,23 @@ pipeline {
                 }
             }
         }
+        stage('Check Docker Network') {
+            steps {
+                script {
+                    def networkExists = sh(
+                        script: "docker network ls | grep -w blog-app-network || echo 'not_found'",
+                        returnStdout: true
+                    ).trim()
+
+                    if (networkExists == "not_found") {
+                        echo " 'blog-app-network' không tồn tại, tạo mới..."
+                        sh "docker network create blog-app-network"
+                    } else {
+                        echo " 'blog-app-network' đã tồn tại!"
+                    }
+                }
+            }
+        }
         stage('start docker-compose') {
             steps {
                 script {
