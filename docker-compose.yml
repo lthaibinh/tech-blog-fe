@@ -11,8 +11,8 @@ services:
     environment:
       - NODE_ENV=production
     networks:
-      - mico-tech-blog_blog-app-network
+      - blog-app-network
 
 networks:
-  mico-tech-blog_blog-app-network:
+  blog-app-network:
     external: true
