@@ -141,11 +141,11 @@ export const MarkdownEditor: FC<AIEditorProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (aiEditorRef.current && value !== aiEditorRef.current.getHtml()) {
-      aiEditorRef.current.setContent(value || "");
-    }
-  }, [value]);
+  // useEffect(() => {
+  //   if (aiEditorRef.current && value !== aiEditorRef.current.getHtml()) {
+  //     aiEditorRef.current.setContent(value || "");
+  //   }
+  // }, [value]);
 
   return <div className="h-[calc(100vh-200px)]" ref={divRef} />;
 };

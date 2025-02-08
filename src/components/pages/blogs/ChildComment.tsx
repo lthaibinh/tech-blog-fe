@@ -26,7 +26,6 @@ export const ChildComment: React.FC<Iprops> = async (props) => {
     return res;
   });
   const comments = pageableComments.data;
-  console.log("binhtest comments", comments);
   return (
     <div className="ml-12 flex flex-col gap-4">
       {comments?.map((comment) => {

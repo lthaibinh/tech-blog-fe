@@ -63,3 +63,11 @@ export interface IPagableRes<T> {
   last: boolean;
   data: T;
 }
+
+export interface IUploadFile {
+  id: number;
+  metaData: string;
+  url: string;
+  type: string;
+  createdAt: Date;
+}

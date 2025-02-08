@@ -12,7 +12,6 @@ export const ParentComment: React.FC<Iprops> = async (props) => {
   const { postId } = props;
   const pageableComments = await lastValueFrom(getCommentsByPostId(postId)).catch(
     (err) => {
-      console.log("binhtest err", err);
       const res: IPagableRes<any[]> = {
         page: 0,
         size: 0,
@@ -25,7 +24,6 @@ export const ParentComment: React.FC<Iprops> = async (props) => {
   );
   const comments = pageableComments.data;
 
-  console.log("binhtest comments", comments);
   return (
     <>
       {comments?.map((comment) => {

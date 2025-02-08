@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import { useEffect, useState } from "react";
 import { MarkdownEditor } from "./MarkdownEditor";
 import {
@@ -7,12 +7,14 @@ import {
   Form,
   FormProps,
   Input,
+  notification,
   Select,
   SelectProps,
   Typography,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { createNewPost, getAllMeta } from "@/services/blogServies";
+import { UploadFileInput } from "@/components/UploadFileInput";
 
 type FieldType = {
   title?: string;
@@ -21,9 +23,11 @@ type FieldType = {
   metaDescription?: string;
   metaTitle: string;
   metaIds: number[];
+  thumbnailUrl: string;
 };
 const NewPost = () => {
   const [form] = Form.useForm();
+  const [api, contextHolder] = notification.useNotification();
 
   const [title, setTitle] = useState("");
   // const [content, setContent] = useState("");
@@ -35,6 +39,9 @@ const NewPost = () => {
   const handleEditorChange = (value: string) => {
     //  setContent(value);
     form.setFieldsValue({ content: value });
+  };
+  const onUploadFileChange = (thumbnailUrl: string) => {
+    form.setFieldsValue({ thumbnailUrl });
   };
   const [options, setOptions] = useState<SelectProps["options"]>([]);
   // const options: SelectProps["options"] = new Array(10)
@@ -59,7 +66,11 @@ const NewPost = () => {
     createNewPost(values).subscribe({
       next: (res) => {
         console.log("binhtet res", res);
-        setOptions(res);
+        form.resetFields();
+        api.open({
+          type: "success",
+          message: "Create new post success",
+        });
       },
       error: (err) => {
         console.log("err", err);
@@ -72,7 +83,6 @@ const NewPost = () => {
     console.log("Failed:", errorInfo);
   };
   const contentValue = Form.useWatch("content", form);
-
   return (
     <Form
       name="basic"
@@ -85,6 +95,7 @@ const NewPost = () => {
       onFinish={onFinish}
       autoComplete="off"
     >
+      {contextHolder}
       <Form.Item<FieldType>
         label="Tiêu đề"
         name="title"
@@ -110,9 +121,17 @@ const NewPost = () => {
       <Form.Item<FieldType>
         // label="Description"
         name="content"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        rules={[
+          { required: true, message: "Please input your username!" },
+          {
+            type: "string",
+            min: 100,
+            message: "Minimum 100 characters",
+          },
+        ]}
       >
         <MarkdownEditor
+          defaultValue={""}
           placeholder="Type your content here..."
           value={contentValue}
           onChange={handleEditorChange} // Update shared content
@@ -138,7 +157,8 @@ const NewPost = () => {
           style={{ width: "100%" }}
           placeholder="Gắn thẻ bài viết"
           options={options}
-          fieldNames={{ // ánh xạ options vs antd
+          fieldNames={{
+            // ánh xạ options vs antd
             label: "value",
             value: "id",
           }}
@@ -159,6 +179,14 @@ const NewPost = () => {
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <TextArea variant="outlined" placeholder="Meta description" rows={4} />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label={"Thumbnail"}
+        name={"thumbnailUrl"}
+        rules={[{ required: true, message: "Please input your file!" }]}
+      >
+        <UploadFileInput onUploadFileChange={onUploadFileChange} />
       </Form.Item>
 
       <Flex justify="space-between" align="center" className="gap-4">
