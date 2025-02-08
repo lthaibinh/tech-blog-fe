@@ -1,3 +1,5 @@
+import { IUserProfile } from ".";
+
 export interface IBlog {
   id: number;
   userId: number;
@@ -12,12 +14,5 @@ export interface IBlog {
   metaTitle: string;
   metaDescription: string;
   updatedDate: Date;
-  userProfile: {
-    id: number;
-    username: string;
-    fullname: string;
-    dob: string;
-    city: string;
-    avatarUrl: string;
-  };
+  userProfile: IUserProfile
 }

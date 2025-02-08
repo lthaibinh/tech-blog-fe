@@ -5,5 +5,9 @@ export const themeConfig: ThemeConfig = {
     colorPrimary: "green",
     fontFamily: "Inter",
   },
-
+  components: {
+    Statistic: {
+      contentFontSize: 13,
+    },
+  },
 };

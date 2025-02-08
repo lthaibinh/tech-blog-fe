@@ -5,8 +5,9 @@ import Meta from "antd/es/card/Meta";
 import { useRouter } from 'next/navigation';
 import { format } from "date-fns";
 import { FC } from "react";
+import { IBlogResponse } from "@/types/api";
 
-export const BlogItem: FC<IBlog> = ({ id, title, description, metas, userProfile,updatedDate  }) => {
+export const BlogItem: FC<IBlogResponse> = ({ id, title, description, metas, userProfile,updatedDate  }) => {
   const router = useRouter();
   const formatedUpdatedDate = updatedDate ? format(new Date(updatedDate), "dd-MM-yyyy HH:mm:ss") : "";
   return (

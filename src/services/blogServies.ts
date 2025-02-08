@@ -41,3 +41,4 @@ export const getCommentsByParentid = ({parentId, postId}: {parentId: number, pos
     url: `/post/comments/${postId}/${parentId}`,
   });
 }
+
