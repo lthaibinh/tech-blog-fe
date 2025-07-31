@@ -21,19 +21,28 @@ export const BlogItemRow: FC<IBlogResponse> = ({
     : "";
   return (
     <div
-      className="flex gap-4 cursor-pointer"
+      className="flex flex-col gap-4 cursor-pointer"
       onClick={() => {
         router.push(`/blogs/${id}`);
       }}
     >
       <div>
         <img
-          style={{ width: "96px", height: "96px", objectFit: "cover" }}
+          style={{ width: "100%", height: "300px", objectFit: "cover" }}
           alt="example"
           src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
         />
       </div>
       <div>
+        <div className="flex flex-wrap gap-2">
+          {metas?.map((meta, i) => (
+            <Tag key={meta.id}>{meta.value}</Tag>
+          ))}
+        </div>
+        <Typography.Title level={4}>{title}</Typography.Title>
+        <Typography.Paragraph className="mt-2">
+          {description}
+        </Typography.Paragraph>
         <div className="flex items-center gap-1">
           <Avatar
             className="!h-9 !w-9"
@@ -44,16 +53,6 @@ export const BlogItemRow: FC<IBlogResponse> = ({
           />
           <p>{userProfile.fullname}</p>
           <p>{formatedUpdatedDate}</p>
-        </div>
-
-        <Typography.Title level={4}>{title}</Typography.Title>
-        <Typography.Paragraph className="mt-2">
-          {description}
-        </Typography.Paragraph>
-        <div className="flex flex-wrap gap-2">
-          {metas?.map((meta, i) => (
-            <Tag key={meta.id}>{meta.value}</Tag>
-          ))}
         </div>
       </div>
     </div>

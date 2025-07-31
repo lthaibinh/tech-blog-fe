@@ -12,7 +12,7 @@ export const AuthorList: React.FC<{ data: IUserProfile[] }> = ({ data }) => {
   return (
     <div style={{ padding: "20px" }}>
       <List
-        header={<h3>Author List</h3>}
+        header={<h3>Top Writers</h3>}
         // footer={<div>Footer</div>}
         bordered
         dataSource={data}
