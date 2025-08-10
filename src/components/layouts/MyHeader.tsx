@@ -3,28 +3,29 @@ import React, { useState } from "react";
 import {
   Avatar,
   Button,
-  Dropdown,
+  Drawer,
   Image,
+  Input,
   Layout,
-  List,
   Menu,
-  MenuProps,
-  Popover,
+  Space,
+  Grid,
 } from "antd";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-const { Header, Content, Footer } = Layout;
-import { useRouter } from "next/navigation";
 import {
   LogoutOutlined,
+  MenuOutlined,
   SearchOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import { LoginPopup } from "../LoginPopup";
-import { Input, Select, Space } from "antd";
 import { UserInfoDrawer } from "../pages/UserInfoDrawer";
 import { NotificationDrawer } from "../pages/NotificationDrawer";
+
+const { Header } = Layout;
+const { useBreakpoint } = Grid;
 
 const menuItems: { key: string; label: React.ReactNode }[] = [
   {
@@ -49,14 +50,10 @@ export const MyHeader = () => {
   const pathname = usePathname();
   const parts = pathname?.match(/^\/\w+/);
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const [open, setOpen] = useState(false);
-  const hide = () => {
-    setOpen(false);
-  };
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen);
-  };
+  const { data: session } = useSession();
+  const screens = useBreakpoint();
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  console.log('screens', screens)
   return (
     <div
       className="bg-mainGradient"
@@ -71,77 +68,67 @@ export const MyHeader = () => {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "end",
+          justifyContent: "space-between",
+          padding: "0 16px",
         }}
-        className="!bg-transparent max-w-[1200px] mx-auto !px-0"
+        className="!bg-transparent max-w-[1360px] mx-auto !px-0 gap-4"
       >
+        {/* Logo */}
         <p
-          className="text-xl font-extrabold logoName text-green-800"
-          onClick={() => {
-            router.push("/");
-          }}
+          className="text-xl font-extrabold logoName text-green-800 cursor-pointer"
+          onClick={() => router.push("/")}
         >
           Daily Tech Blog
         </p>
-        <Space.Compact size="large" className="mx-10 w-80">
-          <Input addonBefore={<SearchOutlined />} placeholder="large size" />
-        </Space.Compact>
-        <div className="flex-1">
+
+        {/* Search input (can hide on very small screens if needed) */}
+        {!screens.xs && (
+          <Space.Compact size="large" className="mx-10 w-80">
+            <Input addonBefore={<SearchOutlined />} placeholder="Tìm kiếm..." />
+          </Space.Compact>
+        )}
+
+        {/* Menu for large screens */}
+        {!screens.xs ? (
           <Menu
             theme="light"
             mode="horizontal"
-            className="!bg-transparent"
+            className="!bg-transparent flex-1"
             defaultSelectedKeys={[parts && parts.length > 0 ? parts[0] : "/"]}
             items={menuItems}
           />
-        </div>
+        ) : (
+          <>
+            <Button
+              className="-order-1"
+              type="text"
+              icon={<MenuOutlined style={{ fontSize: 20 }} />}
+              onClick={() => setDrawerVisible(true)}
+            />
+            <Drawer
+              title="Menu"
+              placement="left"
+              onClose={() => setDrawerVisible(false)}
+              open={drawerVisible}
+            >
+              <Menu
+                mode="vertical"
+                defaultSelectedKeys={[
+                  parts && parts.length > 0 ? parts[0] : "/",
+                ]}
+                items={menuItems}
+                onClick={() => setDrawerVisible(false)} // Close drawer when a menu item is clicked
+              />
+            </Drawer>
+          </>
+        )}
 
-        {/* <List
-          
-          dataSource={menuItems}
-          renderItem={(item) => <List.Item>{item.label}</List.Item>}
-        ></List> */}
-
-        <div className="flex gap-4">
+        {/* Right-side icons */}
+        <div className="flex items-center gap-4">
           <NotificationDrawer />
-          {session && (
-            // <Popover
-            //   content={
-            //     <Button
-            //       className="w-full !bg-red-600 !text-white"
-            //       icon={<LogoutOutlined />}
-            //       onClick={() => {
-            //         hide();
-            //         signOut();
-            //       }}
-            //     >
-            //       Sign Out
-            //     </Button>
-            //   }
-            //   title={session?.user?.name}
-            //   trigger="click"
-            //   open={open}
-            //   onOpenChange={handleOpenChange}
-            // >
-            //   <Avatar
-            //     size={32}
-            //     icon={
-            //       session?.user?.image ? (
-            //         <Image
-            //           preview={false}
-            //           width={32}
-            //           src={session?.user?.image || ""}
-            //         />
-            //       ) : (
-            //         <UserOutlined />
-            //       )
-            //     }
-            //   />
-            // </Popover>
-            <UserInfoDrawer />
-          )}
+          {session && <UserInfoDrawer />}
+          <LoginPopup />
         </div>
-        <LoginPopup />
       </Header>
     </div>
   );

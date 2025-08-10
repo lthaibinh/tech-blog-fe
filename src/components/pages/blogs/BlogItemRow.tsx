@@ -14,6 +14,7 @@ export const BlogItemRow: FC<IBlogResponse> = ({
   metas,
   userProfile,
   updatedDate,
+  thumbnailUrl
 }) => {
   const router = useRouter();
   const formatedUpdatedDate = updatedDate
@@ -21,16 +22,17 @@ export const BlogItemRow: FC<IBlogResponse> = ({
     : "";
   return (
     <div
-      className="flex flex-col gap-4 cursor-pointer"
+      className="flex md:flex-col gap-4 cursor-pointer"
       onClick={() => {
         router.push(`/blogs/${id}`);
       }}
     >
       <div>
         <img
-          style={{ width: "100%", height: "300px", objectFit: "cover" }}
+          className="w-[140px] h-[100px] object-cover md:w-full md:h-[300px]"
+          // style={{ width: "100%", height: "300px", objectFit: "cover" }}
           alt="example"
-          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+          src={thumbnailUrl ?? "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"}
         />
       </div>
       <div>
@@ -40,19 +42,19 @@ export const BlogItemRow: FC<IBlogResponse> = ({
           ))}
         </div>
         <Typography.Title level={4}>{title}</Typography.Title>
-        <Typography.Paragraph className="mt-2">
+        <Typography.Paragraph className="hidden md:block mt-2">
           {description}
         </Typography.Paragraph>
         <div className="flex items-center gap-1">
           <Avatar
-            className="!h-9 !w-9"
+            className="!h-8 !w-8 md:!h-9 md:!w-9"
             src={
               userProfile.avatarUrl ??
               "https://api.dicebear.com/7.x/miniavs/svg?seed=8"
             }
           />
           <p>{userProfile.fullname}</p>
-          <p>{formatedUpdatedDate}</p>
+          <p className="hidden md:block">{formatedUpdatedDate}</p>
         </div>
       </div>
     </div>

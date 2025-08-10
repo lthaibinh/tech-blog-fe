@@ -250,3 +250,9 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker color on hover */
 }
+
+
+.category-list .ant-list-items { 
+  display: flex;
+  padding: 16px !important;
+}

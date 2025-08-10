@@ -8,3 +8,8 @@ export interface IUserProfile {
   city: string;
   avatarUrl: string;
 }
+
+export interface ICategory {
+  id: number;
+  name: string;
+}

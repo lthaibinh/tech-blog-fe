@@ -89,7 +89,7 @@ const NewPost = () => {
       labelCol={{ span: 24 }}
       wrapperCol={{ span: 24 }}
       form={form}
-      className="px-10"
+      className="!px-4 md:!px-0"
       // style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
@@ -97,23 +97,21 @@ const NewPost = () => {
     >
       {contextHolder}
       <Form.Item<FieldType>
-        label="Tiêu đề"
+        label={<Typography.Title className="!p-0" level={5}>Title</Typography.Title>}
         name="title"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <Input placeholder="Tiêu đề" />
       </Form.Item>
       <Form.Item<FieldType>
-        label="Description"
+        label={<Typography.Title className="!p-0" level={5}>Description</Typography.Title>}
         name="description"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
         <TextArea variant="outlined" placeholder="Description" rows={4} />
       </Form.Item>
       <div>
-        <Typography.Title className="!p-0 !m-0" level={3}>
-          Content
-        </Typography.Title>
+        <Typography.Title className="!p-0 !m-0" level={5}>Content</Typography.Title>
         <Typography.Text type="secondary">
           Title, short description, image...
         </Typography.Text>
@@ -139,7 +137,7 @@ const NewPost = () => {
       </Form.Item>
 
       <div>
-        <Typography.Title className="!p-0 !m-0" level={3}>
+        <Typography.Title className="!p-0 !m-0" level={5}>
           Properties
         </Typography.Title>
         <Typography.Text type="secondary">
@@ -166,7 +164,7 @@ const NewPost = () => {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="Meta title"
+        label={<Typography.Title className="!p-0 !m-0" level={5}>Meta Title</Typography.Title>}
         name="metaTitle"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
@@ -174,7 +172,7 @@ const NewPost = () => {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label="meta Description"
+        label={<Typography.Title className="!p-0 !m-0" level={5}>Meta Description</Typography.Title>}
         name="metaDescription"
         rules={[{ required: true, message: "Please input your username!" }]}
       >
@@ -182,7 +180,7 @@ const NewPost = () => {
       </Form.Item>
 
       <Form.Item<FieldType>
-        label={"Thumbnail"}
+        label={<Typography.Title className="!p-0 !m-0" level={5}>Thumbnail</Typography.Title>}
         name={"thumbnailUrl"}
         rules={[{ required: true, message: "Please input your file!" }]}
       >

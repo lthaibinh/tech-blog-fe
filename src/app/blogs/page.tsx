@@ -33,7 +33,7 @@ export default async function Home() {
         description={toastProps.description}
       />
 
-      <div className=" w-full mx-auto h-96 text-left bg-homepage bg-cover bg-no-repeat bg-right items-start justify-center" />
+      {/* <div className=" w-full mx-auto h-96 text-left bg-homepage bg-cover bg-no-repeat bg-right items-start justify-center" /> */}
       <BodyLayout>
         {blogs.length === 0 && <Empty />}
         <Row gutter={[32, 32]}>

@@ -1,3 +1,5 @@
+import { IUserProfile } from ".";
+
 export interface IBlogResponse {
   id: number;
   userId: number;
@@ -12,14 +14,8 @@ export interface IBlogResponse {
   metaTitle: string;
   metaDescription: string;
   updatedDate: Date;
-  userProfile: {
-    id: number;
-    username: string;
-    fullname: string;
-    dob: string;
-    city: string;
-    avatarUrl: string;
-  };
+  userProfile: IUserProfile;
+  thumbnailUrl: string;
 }
 export interface IUploadFileRes {
   status: number;
